@@ -2,9 +2,11 @@
   "name": "musicify_bff",
   "version": "1.0.0",
   "description": "BFF(Backend for Frontend) for Musicify. Implemented in Apollo GraphQL.",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:prod": "tsc --build && node dist/index.js",
+    "start": "nodemon index.ts"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,14 @@
   "bugs": {
     "url": "https://github.com/RimidalU/musicify_bff/issues"
   },
-  "homepage": "https://github.com/RimidalU/musicify_bff#readme"
+  "homepage": "https://github.com/RimidalU/musicify_bff#readme",
+  "dependencies": {
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "nodemon": "^2.0.19",
+    "ts-loader": "^9.3.1",
+    "ts-node": "^10.8.2"
+  }
 }
