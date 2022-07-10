@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": " nodemon --watch src --exec ts-node-esm src/index.ts",
-    "start:prod": "tsc src/index.ts",
+    "start:prod": "tsc --build && node dist/index.js",
     "format": "prettier --write src/**/*.ts{,x}",
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}"
   },

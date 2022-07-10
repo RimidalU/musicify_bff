@@ -1,15 +1,31 @@
 import 'dotenv/config';
-import { ApolloServer } from 'apollo-server';
-import { typeDefs } from './schema.js';
+import merge from 'lodash.merge';
+
+import { ApolloServer, gql } from 'apollo-server';
+import { userSchema } from './modules/users/user.schema.js';
+import { userResolver } from './modules/users/user.resolver.js';
+import { UsersService } from './modules/users/user.service.js';
 
 const PORT = process.env.PORT || 3000;
 
-const server = new ApolloServer({ typeDefs });
+const typeDefs = gql`
+	${userSchema}
+`;
 
-server.listen(PORT).then(() => {
+const server = new ApolloServer({
+	typeDefs,
+	resolvers: merge(userResolver),
+	dataSources: () => {
+		return {
+			usersService: new UsersService(),
+		};
+	},
+});
+
+server.listen(PORT).then(({ url }) => {
 	console.log(`
     🚀  Server is running!
     🔉  Listening on port ${PORT}
-    📭  Query at https://studio.apollographql.com/dev
+    📭  Query at ${url}
   `);
 });
