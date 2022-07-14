@@ -1,35 +1,37 @@
 export const albumsSchema = `
 type Query {
   album(id: String!): Album
-  albums(limit: Int, offset: Int): [Album]
+
+  albums(
+    limit: Int
+    offset: Int
+  ): [Album]
 }
 
 type Mutation {
 
   createAlbum(
-    name: String!, 
-    released: Int, 
-    artistsIds: [String], 
-    bandsIds: [String], 
-    trackIds: [String], 
-    genresIds: [String], 
+    name: String!
+    released: Int
+    artistsIds: [String]
+    bandsIds: [String] 
+    trackIds: [String] 
+    genresIds: [String] 
     image: String
-    ): Album
+  ): Album
     
   deleteAlbum(id: String!): isDeleteResponse
 
   updateAlbum(
-    id: String!, 
-    name: String, 
-    released: Int, 
-    artistsIds: [String], 
-    bandsIds: [String], 
-    trackIds: [String], 
-    genresIds: [String], 
+    id: String! 
+    name: String 
+    released: Int
+    artistsIds: [String]
+    bandsIds: [String]
+    trackIds: [String]
+    genresIds: [String]
     image: String
-    ): Album 
-}
-
+  ): Album 
 }
 
 type Album {

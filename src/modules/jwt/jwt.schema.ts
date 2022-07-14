@@ -2,7 +2,8 @@
 export const jwtSchema = `
 type Query {  
   jwt(
-    email: String!,
+    email: String!
     password: String!
   ): String
-}`;
+}
+`;

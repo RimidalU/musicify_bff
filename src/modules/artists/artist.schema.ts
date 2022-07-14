@@ -1,35 +1,39 @@
 export const artistSchema = `
 type Query {
   artist(id: String!): Artist
-  artists(limit: Int, offset: Int): [Artist]
+
+  artists(
+    limit: Int
+    offset: Int
+  ): [Artist]
 }
 
 type Mutation {
 
   createArtist(
-    firstName: String!, 
-    secondName: String!,  
-    country: String!, 
-    middleName: String, 
-    birthDate: String, 
-    birthPlace: String, 
-    bandsIds: [String], 
+    firstName: String!
+    secondName: String!  
+    country: String!
+    middleName: String
+    birthDate: String
+    birthPlace: String
+    bandsIds: [String]
     instruments: [String]
-    ): Artist
+  ): Artist
 
   deleteArtist(id: String!): isDeleteResponse
-  updateArtist(
-    id: String!, 
-    firstName: String,
-    secondName: String,
-    country: String, 
-    middleName: String, 
-    birthDate: String, 
-    birthPlace: String, 
-    bandsIds: [String], 
-    instruments: [String]
-    ): Artist 
 
+  updateArtist(
+    id: String! 
+    firstName: String
+    secondName: String
+    country: String
+    middleName: String
+    birthDate: String
+    birthPlace: String 
+    bandsIds: [String]
+    instruments: [String]
+  ): Artist 
 }
 
 type Artist {
@@ -43,5 +47,4 @@ type Artist {
   bands: [Band]
   instruments: [String]
 }
-
 `;

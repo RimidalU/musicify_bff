@@ -1,15 +1,14 @@
 export interface IGenre {
-  id?: string;
-  _id?: string;
-  name?: string;
-  description?: string;
-  country?: string;
-  year?: number;
+	id?: string;
+	_id?: string;
+	name?: string;
+	country?: string;
+	year?: number;
 }
 
 export interface IGenres {
-  items: [IGenre];
-  limit: number;
-  offset: number;
-  total: number;
+	items: [IGenre];
+	limit: number;
+	offset: number;
+	total: number;
 }

@@ -1,31 +1,33 @@
 export const bandSchema = `
 type Query {
   band(id: String!): Band
-  bands(limit: Int, offset:Int): [Band]
+
+  bands(
+    limit: Int
+    offset:Int
+  ): [Band]
 }
 
 type Mutation {
 
   createBand(
-    name: String!, 
-    origin: String, 
-    members: [inputMember], 
-    website: String, 
+    name: String! 
+    origin: String 
+    members: [inputMember]
+    website: String 
     genresIds:[String]
-    ): Band
+  ): Band
 
   deleteBand(id: String!): isDeleteResponse
 
   updateBand(
-    id: String!, 
-    name: String!, 
-    origin: String, 
-    members: [inputMember], 
-    website: String, 
+    id: String! 
+    name: String!
+    origin: String
+    members: [inputMember]
+    website: String
     genresIds:[String]
-    ): Band
-}
-
+  ): Band
 }
 
 type Band {

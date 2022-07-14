@@ -1,28 +1,31 @@
 export const genresSchema = `
 type Query {
   genre(id: String!): Genre
-  genres(limit: Int, offset: Int): [Genre]
+
+  genres(
+    limit: Int
+    offset: Int
+  ): [Genre]
 }
 
 type Mutation {
 
   createGenre(
-    name: String!,
-    description: String, 
-    country: String, 
+    name: String!
+    description: String 
+    country: String 
     year: Int
   ): Genre
 
   deleteGenre(id: String!): isDeleteResponse
 
   updateGenre(
-    id: String!, 
-    name: String, 
-    description: String, 
-    country: String, 
+    id: String! 
+    name: String 
+    description: String
+    country: String
     year: Int
   ): Genre
-
 }
 
 type Genre {
@@ -34,7 +37,7 @@ type Genre {
 }
 
 type isDeleteResponse {
-  acknowledged: Boolean,
+  acknowledged: Boolean
   deletedCount: Int
 }
 `;
