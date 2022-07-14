@@ -23,7 +23,7 @@ type Mutation {
   deleteTrack(id: String!): isDeleteResponse
 
   updateTrack(
-    id: String 
+    id: String! 
     title: String
     albumIds: [String]
     bandsIds: [String]
