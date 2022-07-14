@@ -1,0 +1,49 @@
+{
+  "name": "musicify_bff",
+  "version": "1.0.0",
+  "description": "BFF(Backend for Frontend) for Musicify. Implemented in Apollo GraphQL.",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "start": " nodemon --watch src --exec ts-node-esm src/index.ts",
+    "start:prod": "tsc --build && node dist/index.js",
+    "format": "prettier --write src/**/*.ts{,x}",
+    "lint": "tsc --noEmit && eslint src/**/*.ts{,x}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RimidalU/musicify_bff.git"
+  },
+  "keywords": [],
+  "author": "RimidalU",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RimidalU/musicify_bff/issues"
+  },
+  "homepage": "https://github.com/RimidalU/musicify_bff#readme",
+  "dependencies": {
+    "apollo-datasource-rest": "^3.6.1",
+    "apollo-server": "^3.9.0",
+    "dotenv": "^16.0.1",
+    "graphql": "^16.5.0",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
+    "ts-loader": "^9.3.1",
+    "ts-node": "^10.8.2"
+  }
+}
