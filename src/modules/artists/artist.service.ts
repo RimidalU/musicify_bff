@@ -3,7 +3,7 @@ import { IArtist, IArtists } from './IArtist.js';
 import { RESTDataSource } from 'apollo-datasource-rest';
 import { jwtToken } from './../jwt/jwt.service.js';
 
-export class ArtistService extends RESTDataSource {
+export class ArtistsService extends RESTDataSource {
 	constructor() {
 		super();
 		this.baseURL = process.env.ARTISTS_URL;

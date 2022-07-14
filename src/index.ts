@@ -13,7 +13,7 @@ import { tracksSchema } from './modules/tracks/tracks.schema.js';
 import { userResolver } from './modules/users/user.resolver.js';
 import { jwtResolver } from './modules/jwt/jwt.resolver.js';
 import { genreResolver } from './modules/genres/genres.resolver.js';
-import { artistResolver } from './modules/artists/artist.resolver.js';
+import { artistsResolver } from './modules/artists/artist.resolver.js';
 import { bandsResolver } from './modules/bands/bands.resolver.js';
 import { albumsResolver } from './modules/albums/albums.resolver.js';
 import { tracksResolver } from './modules/tracks/tracks.resolver.js';
@@ -21,7 +21,7 @@ import { tracksResolver } from './modules/tracks/tracks.resolver.js';
 import { UsersService } from './modules/users/user.service.js';
 import { GenreService } from './modules/genres/genres.service.js';
 import { JwtService } from './modules/jwt/jwt.service.js';
-import { ArtistService } from './modules/artists/artist.service.js';
+import { ArtistsService } from './modules/artists/artist.service.js';
 import { BandsService } from './modules/bands/bands.service.js';
 import { AlbumsService } from './modules/albums/albums.service.js';
 import { TracksService } from './modules/tracks/tracks.service.js';
@@ -44,7 +44,7 @@ const server = new ApolloServer({
 		userResolver,
 		jwtResolver,
 		genreResolver,
-		artistResolver,
+		artistsResolver,
 		bandsResolver,
 		albumsResolver,
 		tracksResolver,
@@ -55,7 +55,7 @@ const server = new ApolloServer({
 			usersService: new UsersService(),
 			jwtService: new JwtService(),
 			genreService: new GenreService(),
-			artistService: new ArtistService(),
+			artistsService: new ArtistsService(),
 			bandsService: new BandsService(),
 			albumsService: new AlbumsService(),
 			tracksService: new TracksService(),
