@@ -49,15 +49,7 @@ const server = new ApolloServer({
 		albumsResolver,
 		tracksResolver,
 	),
-	csrfPrevention: true,
-	cache: 'bounded',
-	context: ({ req }) => {
-		const token = req.headers.Authorization || '';
-		console.log({ token });
 
-		// return { jwt: token };
-		return { token };
-	},
 	dataSources: () => {
 		return {
 			usersService: new UsersService(),

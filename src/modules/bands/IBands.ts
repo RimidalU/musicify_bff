@@ -1,6 +1,6 @@
 import { IGenre } from "../genres/IGenres";
 
-export interface Member {
+export interface IMember {
   id: string;
   firstName: string;
   secondName: string;
@@ -8,20 +8,20 @@ export interface Member {
   instruments: [string];
 }
 
-export interface Band {
+export interface IBand {
   id?: string;
   _id?: string;
   name?: string;
   origin?: string;
-  members?: [Member];
+  members?: [IMember];
   membersIds?: [string];
   website?: string;
   genres?: [IGenre];
   genresIds?: [string];
 }
 
-export interface Bands {
-  items: [Band];
+export interface IBands {
+  items: [IBand];
   limit: number;
   offset: number;
   total: number;

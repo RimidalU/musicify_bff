@@ -1,4 +1,3 @@
-// import { buildSchema } from 'graphql';
 export const userSchema = `
 type Query {
   user(id: ID!): User

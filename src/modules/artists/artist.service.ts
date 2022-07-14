@@ -1,6 +1,7 @@
 import 'dotenv/config';
-import { Artist, Artists } from './IArtist.js';
+import { IArtist, IArtists } from './IArtist.js';
 import { RESTDataSource } from 'apollo-datasource-rest';
+import { jwtToken } from './../jwt/jwt.service.js';
 
 export class ArtistService extends RESTDataSource {
 	constructor() {
@@ -8,34 +9,34 @@ export class ArtistService extends RESTDataSource {
 		this.baseURL = process.env.ARTISTS_URL;
 	}
 
-	willSendRequest(request) {
-		if (this.context.token) {
-			request.headers.set('Authorization', this.context.token);
-		}
-	}
-
-	async artist(id: string): Promise<Partial<Artist>> {
+	async artist(id: string): Promise<Partial<IArtist>> {
 		const data = await this.get(`/${id}`);
 		return data;
 	}
-	async artists(limit = 5, offset = 0): Promise<Partial<Artists>> {
+	async artists(limit = 5, offset = 0): Promise<Partial<IArtists>> {
 		const data = await this.get('', { limit: limit, offset: offset });
 		return data.items;
 	}
 
-	async createArtist(data: Artist): Promise<Partial<Artist>> {
-		const response = await this.post('', data);
+	async createArtist(data: IArtist): Promise<Partial<IArtist>> {
+		const response = await this.post('', data, {
+			headers: { Authorization: `Bearer ${jwtToken}` },
+		});
 		return response;
 	}
-	async deleteArtist(id: string): Promise<Partial<Artist>> {
-		const response = await this.delete('/' + id);
+	async deleteArtist(id: string): Promise<Partial<IArtist>> {
+		const response = await this.delete(`/${id}`, id, {
+			headers: { Authorization: `Bearer ${jwtToken}` },
+		});
 		return response;
 	}
-	async updateArtist(data: Artist): Promise<Partial<Artist>> {
+	async updateArtist(data: IArtist): Promise<Partial<IArtist>> {
 		const requestData = Object.assign({}, data);
 		const id = data.id;
 		delete requestData.id;
-		const response = await this.put('/' + id, requestData);
+		const response = await this.put(`/${id}`, requestData, {
+			headers: { Authorization: `Bearer ${jwtToken}` },
+		});
 		return response;
 	}
 }

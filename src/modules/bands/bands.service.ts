@@ -1,5 +1,6 @@
 import 'dotenv/config';
-import { Band, Bands } from './IBands.js';
+import { IBand, IBands } from './IBands.js';
+import { jwtToken } from './../jwt/jwt.service.js';
 import { RESTDataSource } from 'apollo-datasource-rest';
 
 export class BandsService extends RESTDataSource {
@@ -8,17 +9,17 @@ export class BandsService extends RESTDataSource {
 		this.baseURL = process.env.BANDS_URL;
 	}
 
-	willSendRequest(request) {
-		if (this.context.token) {
-			request.headers.set('Authorization', this.context.token);
-		}
-	}
-
-	async band(id: string): Promise<Partial<Band>> {
+	async band(id: string): Promise<Partial<IBand>> {
 		const data = await this.get(`/${id}`);
 		return data;
 	}
-	async createBand(data): Promise<Partial<Bands>> {
+
+	async bands(limit = 5, offset = 0): Promise<Partial<IBands>> {
+		const data = await this.get('', { limit: limit, offset: offset });
+		return data.items;
+	}
+
+	async createBand(data): Promise<Partial<IBand>> {
 		const addMembers = () => {
 			return data.artist.map((member) => {
 				return {
@@ -28,29 +29,35 @@ export class BandsService extends RESTDataSource {
 				};
 			});
 		};
-		const response = await this.post('', {
-			name: data.name,
-			origin: data.origin,
-			members: addMembers,
-			website: data.website,
-			genresIds: data.genresIds,
+		const response = await this.post(
+			'',
+			{
+				name: data.name,
+				origin: data.origin,
+				members: addMembers,
+				website: data.website,
+				genresIds: data.genresIds,
+			},
+			{
+				headers: { Authorization: `Bearer ${jwtToken}` },
+			},
+		);
+		return response;
+	}
+
+	async deleteBand(id: string): Promise<Partial<IBand>> {
+		const response = await this.delete(`/${id}`, id, {
+			headers: { Authorization: `Bearer ${jwtToken}` },
 		});
 		return response;
 	}
-	async bands(limit = 5, offset = 0) {
-		const data = await this.get('', { limit: limit, offset: offset });
-		return data.items;
-	}
-
-	async deleteBand(id: string): Promise<Partial<Band>> {
-		const response = await this.delete('/' + id);
-		return response;
-	}
-	async updateBand(data: Band): Promise<Partial<Band>> {
+	async updateBand(data: IBand): Promise<Partial<IBand>> {
 		const requestData = Object.assign({}, data);
 		const id = data.id;
 		delete requestData.id;
-		const response = await this.put('/' + id, requestData);
+		const response = await this.put(`/${id}`, requestData, {
+			headers: { Authorization: `Bearer ${jwtToken}` },
+		});
 		return response;
 	}
 }

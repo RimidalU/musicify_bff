@@ -1,3 +1,4 @@
+import { jwtToken } from './../jwt/jwt.service.js';
 import 'dotenv/config';
 import { IGenre, IGenres } from './IGenres.js';
 import { RESTDataSource } from 'apollo-datasource-rest';
@@ -6,12 +7,6 @@ export class GenreService extends RESTDataSource {
 	constructor() {
 		super();
 		this.baseURL = process.env.GENRES_URL;
-	}
-
-	willSendRequest(request) {
-		if (this.context.token) {
-			request.headers.set('Authorization', this.context.token);
-		}
 	}
 
 	async genre(id: string): Promise<Partial<IGenre>> {
@@ -23,18 +18,24 @@ export class GenreService extends RESTDataSource {
 		return data.items;
 	}
 	async createGenre(data: IGenre): Promise<Partial<IGenre>> {
-		const response = await this.post('', data);
+		const response = await this.post('', data, {
+			headers: { Authorization: `Bearer ${jwtToken}` },
+		});
 		return response;
 	}
 	async deleteGenre(id: string): Promise<Partial<IGenre>> {
-		const response = await this.delete('/' + id);
+		const response = await this.delete(`/${id}`, id, {
+			headers: { Authorization: `Bearer ${jwtToken}` },
+		});
 		return response;
 	}
 	async updateGenre(data: IGenre): Promise<Partial<IGenre>> {
 		const requestData = Object.assign({}, data);
 		const id = data.id;
 		delete requestData.id;
-		const response = await this.put('/' + id, requestData);
+		const response = await this.put(`/${id}`, requestData, {
+			headers: { Authorization: `Bearer ${jwtToken}` },
+		});
 		return response;
 	}
 }
